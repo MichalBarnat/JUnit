@@ -1,2 +1,4 @@
-package pl.kurs;public class Main {
+package pl.kurs;
+
+public class Main {
 }
