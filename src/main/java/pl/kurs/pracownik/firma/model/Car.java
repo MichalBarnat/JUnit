@@ -13,11 +13,17 @@ public class Car {
     private Branch branch;
     private Employee employee;
 
+    private static List<Car> extent = new ArrayList<>();
+
 
     public Car(String brand, String model, int age) {
+        if(age < 0){
+            throw new IllegalArgumentException("Cars age must be 0 or higher!");
+        }
         this.brand = brand;
         this.model = model;
         this.age = age;
+        extent.add(this);
     }
 
     public String getBrand() {
@@ -72,5 +78,9 @@ public class Car {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public static List<Car> getExtent() {
+        return extent;
     }
 }

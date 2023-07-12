@@ -29,6 +29,9 @@ public class Company {
         if(employee == null || branch == null) {
             throw new IllegalArgumentException("Employee or branch do not exist!");
         }
+        if(employee.getCompanies().contains(this)) {
+            throw new IllegalArgumentException("EMployee is already hired in this company!");
+        }
         employees.add(employee);
         employee.getCompanies().add(this);
         branch.getEmployees().add(employee);

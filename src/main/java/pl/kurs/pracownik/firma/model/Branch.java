@@ -36,6 +36,7 @@ public class Branch {
             throw new IllegalArgumentException("Car already have set employee!");
         }
         car.setEmployee(employee);
+        employee.getCars().add(car);
     }
 
     public String getCity() {

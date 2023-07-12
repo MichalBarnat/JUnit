@@ -17,6 +17,8 @@ public class Employee extends Person {
 
     private List<Branch> branches = new ArrayList<>();
 
+    private List<Car> cars = new ArrayList<>();
+
     public Employee(String name, String surname, LocalDate birthDate, Sex sex, double salary, Position position, int seniority) {
         super(name, surname, birthDate, sex);
         this.salary = salary;
@@ -60,6 +62,10 @@ public class Employee extends Person {
 
     public List<Branch> getBranches() {
         return branches;
+    }
+
+    public List<Car> getCars() {
+        return cars;
     }
 
     @Override
