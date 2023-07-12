@@ -38,25 +38,19 @@ public class CarServiceTest {
 
         cars = new ArrayList<>(Arrays.asList(car1, car2, car3, car4));
 
-        e1 = new Employee("Jan"," Kowalski", LocalDate.parse("1995-01-01"), Sex.MALE, Position.WORKER, 0);
+        e1 = new Employee("Jan"," Kowalski", LocalDate.parse("1995-01-01"), Sex.MALE, Position.BOSS, 10);
         e2 = new Employee("Maciej","Krzyzak", LocalDate.parse("1993-01-01"), Sex.MALE, Position.MANAGEMENT, 3);
         company = new Company("Budimex", "Warsaw");
         branch = new Branch("Gdansk");
+        company.addBranch(branch);
         company.hireEmployee(e1, branch);
         company.hireEmployee(e2, branch);
-        company.addBranch(branch);
         company.addCar(car1, branch);
         company.addCar(car2, branch);
         company.addCar(car3, branch);
         company.addCar(car4, branch);
         branch.setCarToEmployee(car1, e1);
         branch.setCarToEmployee(car2, e2);
-    }
-
-    @Test
-    public void shouldReturnListOfFreeCars() {
-        List<Car> freeCars = new ArrayList<>(Arrays.asList(car3, car4));
-        assertEquals(freeCars, service.listOfFreeCars(cars));
     }
 
     @Test
@@ -85,26 +79,36 @@ public class CarServiceTest {
     }
 
 
+    @Test
+    public void shouldReturnListOfFreeCars() {
+        List<Car> freeCars = new ArrayList<>(Arrays.asList(car3, car4));
+        assertEquals(freeCars, service.listOfFreeCars(cars));
+    }
 
-//    @Test
-//    public void shouldReturnListOfUsedCars() {
-//
-//    }
-//
-//    @Test
-//    public void shouldReturnListOfCarsOlderThan10Years() {
-//
-//    }
-//
-//    @Test
-//    public void shouldReturnListOfCarsYoungerThan15Years() {
-//
-//    }
-//
-//    @Test
-//    public void shouldReturnListOfCarsForBossPosition() {
-//
-//    }
+
+    @Test
+    public void shouldReturnListOfUsedCars() {
+        List<Car> usedCars = new ArrayList<>(Arrays.asList(car1,car2));
+        assertEquals(usedCars,service.listOfUsedCars(cars));
+    }
+
+    @Test
+    public void shouldReturnListOfCarsOlderThan10Years() {
+        List<Car> olderThan = new ArrayList<>(Arrays.asList(car1,car2, car3));
+        assertEquals(olderThan, service.listOfCarsOlderThan(cars, 10));
+    }
+
+    @Test
+    public void shouldReturnListOfCarsYoungerThan15Years() {
+        List<Car> youngerThan15 = new ArrayList<>(Arrays.asList(car4));
+        assertEquals(youngerThan15,service.listOfCarsYoungerThan(cars,15));
+    }
+
+    @Test
+    public void shouldReturnListOfCarsForBossPosition() {
+        List<Car> carsForBosses = new ArrayList<>(Arrays.asList(car1));
+        assertEquals(carsForBosses, service.listOfCarsForThatPosition(cars, Position.BOSS));
+    }
 
 
 

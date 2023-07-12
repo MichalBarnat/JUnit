@@ -3,9 +3,11 @@ package pl.kurs.pracownik.firma.service;
 
 import pl.kurs.pracownik.firma.exceptions.NoCarsExceptions;
 import pl.kurs.pracownik.firma.model.Car;
+import pl.kurs.pracownik.firma.model.Employee;
 import pl.kurs.pracownik.firma.model.Position;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CarService {
 
@@ -78,7 +80,13 @@ public class CarService {
                 .orElseGet(Collections::emptyList)
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(c -> c.getEmployee().getPosition().equals(position))
+                .map(c -> c.getEmployee())
+                .filter(Objects::nonNull)
+                .filter(e -> e.getPosition().equals(position))
+                .map(Employee::getCars)
+                .flatMap(List::stream)
                 .toList();
+
+
     }
 }

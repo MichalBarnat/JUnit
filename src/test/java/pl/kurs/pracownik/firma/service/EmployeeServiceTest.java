@@ -4,14 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 import pl.kurs.pracownik.firma.exceptions.NoEmployeeWithHighestSeniorityException;
 import pl.kurs.pracownik.firma.exceptions.NoEmployeeWithLowestSeniorityException;
-import pl.kurs.pracownik.firma.model.Employee;
-import pl.kurs.pracownik.firma.model.Position;
-import pl.kurs.pracownik.firma.model.Sex;
+import pl.kurs.pracownik.firma.model.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 
@@ -23,6 +22,19 @@ public class EmployeeServiceTest {
     private Employee e4;
     private Employee e5;
     private Employee e6;
+
+    private Company company1;
+    private Branch branchC1a;
+    private Branch branchC1b;
+    private Company company2;
+    private Branch branchC2a;
+    private Branch branchC2b;
+    private Company company3;
+    private Branch branchC3a;
+    private Branch branchC3b;
+
+
+
 
     private List<Employee> employees;
 
@@ -44,6 +56,29 @@ public class EmployeeServiceTest {
                 Sex.MALE, Position.BOSS, 7);
 
         employees = new ArrayList<>(Arrays.asList(e1, e2, e3, e4, e5, e6));
+
+        company1 = new Company("Company1", "Warsaw");
+        branchC1a = new Branch("Gdansk");
+        branchC1b = new Branch("Rzeszow");
+        company2 = new Company("Company2", "Haiti");
+        branchC2a = new Branch("Tokio");
+        branchC2b = new Branch("Srilanka");
+        company3 = new Company("Company3", "Honolulu");
+        branchC3a = new Branch("Wroclaw");
+        branchC3b = new Branch("Lublin");
+
+        company1.hireEmployee(e1, branchC1a);
+        company2.hireEmployee(e1, branchC2a);
+        company3.hireEmployee(e1, branchC3a);
+
+        company1.hireEmployee(e2, branchC1b);
+        company2.hireEmployee(e2, branchC2b);
+
+        company1.hireEmployee(e3, branchC1a);
+        company2.hireEmployee(e3, branchC2b);
+
+
+
 
     }
 
@@ -117,20 +152,22 @@ public class EmployeeServiceTest {
         employeeService.lowestSeniority(listForTest);
     }
 
-//    @Test
-//    public void shouldReturnEmployeeWhoWorksFor3Companies() {
-//        //workingInTheMostCompanies
-//    }
-//
-//    @Test
-//    public void shouldReturnListOfEmployeesWhoWorkForMoreThanOneCompany() {
-//        //employeesWorkForMoreThanOneCompany
-//    }
-//
-//    @Test
-//    public void shouldReturnListOfEmployeesWhoWorksAsWorkers() {
-//        //employeesOnPosition
-//    }
+    @Test
+    public void shouldReturnEmployeeWhoWorksFor3Companies() {
+        assertEquals(e1, employeeService.workingInTheMostCompanies(employees));
+    }
+
+    @Test
+    public void shouldReturnListOfEmployeesWhoWorkForMoreThanOneCompany() {
+        //employeesWorkForMoreThanOneCompany
+        assertEquals(Arrays.asList(e1,e2,e3),employeeService.employeesWorkForMoreThanOneCompany(employees));
+    }
+
+    @Test
+    public void shouldReturnListOfEmployeesWhoWorksAsWorkers() {
+        //employeesOnPositiona
+        assertEquals(Arrays.asList(e3,e4,e5),employeeService.employeesOnPosition(employees,Position.WORKER));
+    }
 
 
 }

@@ -26,16 +26,21 @@ public class Company {
     }
 
     public void hireEmployee(Employee employee, Branch branch) {
-        if(employee == null || branch == null) {
-            throw new IllegalArgumentException("Employee or branch do not exist!");
-        }
-        if(employee.getCompanies().contains(this)) {
-            throw new IllegalArgumentException("EMployee is already hired in this company!");
-        }
-        employees.add(employee);
-        employee.getCompanies().add(this);
+            if(employee == null || branch == null) {
+                throw new IllegalArgumentException("Employee or branch do not exist!");
+            }
+            if(employee.getCompanies().contains(this)) {
+                throw new IllegalArgumentException("EMployee is already hired in this company!");
+            }
+            if(branch.getCompany() != null && !branch.getCompany().equals(this)){
+                throw new IllegalArgumentException("This branch have other company");
+            }
+            employees.add(employee);
+            employee.getCompanies().add(this);
         branch.getEmployees().add(employee);
         employee.getBranches().add(branch);
+        branch.setCompany(this);
+        branches.add(branch);
     }
 
     public void fireEmployee(Employee employee) {

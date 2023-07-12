@@ -87,4 +87,9 @@ public class Employee extends Person {
     public int hashCode() {
         return Objects.hash(salary, seniority, bonus, position, companies, branches);
     }
+
+    @Override
+    public String toString() {
+        return getName() + " " + getSurname();
+    }
 }

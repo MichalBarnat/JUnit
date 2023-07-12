@@ -35,23 +35,23 @@ public class ArrayUtilTest {
         arrayUtil.sumOfArray(arr);
     }
 
-//    @Test(expected = ArrayIsNullException.class)
-//    public void shouldThrowArrayIsNullExceptionOnPoroductOfArray() {
-//        int[] arr = null;
-//        arrayUtil.productOfArray(arr);
-//    }
-//
-//    @Test(expected = ArrayIsNullException.class)
-//    public void shouldThrowArrayIsNullExceptionOnMax() {
-//        int[] arr = null;
-//        arrayUtil.max(arr);
-//    }
-//
-//    @Test(expected = ArrayIsNullException.class)
-//    public void shouldThrowArrayIsNullExceptionOnMin() {
-//        int[] arr = null;
-//        arrayUtil.min(arr);
-//    }
+    @Test(expected = ArrayIsNullException.class)
+    public void shouldThrowArrayIsNullExceptionOnProductOfArray() {
+        int[] arr = null;
+        arrayUtil.productOfArray(arr);
+    }
+
+    @Test(expected = ArrayIsNullException.class)
+    public void shouldThrowArrayIsNullExceptionOnMax() {
+        int[] arr = null;
+        arrayUtil.max(arr);
+    }
+
+    @Test(expected = ArrayIsNullException.class)
+    public void shouldThrowArrayIsNullExceptionOnMin() {
+        int[] arr = null;
+        arrayUtil.min(arr);
+    }
 
     @Test
     public void shouldReturnMaxOfArray() {
@@ -70,8 +70,8 @@ public class ArrayUtilTest {
 
     @Test
     public void shouldReturnSortedArray() {
-        int[] arr = {5, 3, 1, 2, 4};
-        assertEquals(arr, arrayUtil.sort(arr));
+        int[] arr = {5, 4, 3, 2, 1};
+        assertArrayEquals(array, arrayUtil.sort(arr));
     }
 
 
