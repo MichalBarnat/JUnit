@@ -1,11 +1,18 @@
 package pl.kurs.pracownik.firma.model;
 
+import pl.kurs.pracownik.firma.exceptions.BranchDoNotExistException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Car {
     private String brand;
     private String model;
     private int age;
     private Company company;
     private Branch branch;
+    private Employee employee;
+
 
     public Car(String brand, String model, int age) {
         this.brand = brand;
@@ -54,8 +61,16 @@ public class Car {
 
     public void setBranch(Branch branch) {
         if(branch == null) {
-            throw new IllegalArgumentException("Branch is null!");
+            throw new BranchDoNotExistException();
         }
         this.branch = branch;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }
