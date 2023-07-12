@@ -42,6 +42,9 @@ public class Car {
     }
 
     public void setCompany(Company company) {
+        if(company == null) {
+            throw new IllegalArgumentException("Company is null!");
+        }
         this.company = company;
     }
 
@@ -50,6 +53,9 @@ public class Car {
     }
 
     public void setBranch(Branch branch) {
+        if(branch == null) {
+            throw new IllegalArgumentException("Branch is null!");
+        }
         this.branch = branch;
     }
 }

@@ -11,7 +11,7 @@ public class EmployeeService {
                 .orElseGet(Collections::emptyList)
                 .stream()
                 .filter(Objects::nonNull)
-                .min(Comparator.comparing(Employee::getBirthDate))
+                .min(Comparator.comparing(Employee::getAge))
                 .orElse(null);
     }
 
@@ -20,7 +20,7 @@ public class EmployeeService {
                 .orElseGet(Collections::emptyList)
                 .stream()
                 .filter(Objects::nonNull)
-                .max(Comparator.comparing(Employee::getBirthDate))
+                .max(Comparator.comparing(Employee::getAge))
                 .orElse(null);
     }
 

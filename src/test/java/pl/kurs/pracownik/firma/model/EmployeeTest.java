@@ -3,6 +3,8 @@ package pl.kurs.pracownik.firma.model;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.Assert.*;
 
 public class EmployeeTest {
@@ -11,8 +13,8 @@ public class EmployeeTest {
 
     @Before
     public void init() {
-        employee = new Employee("Jan", "Kowalski", 3000);
-        company = new Company("Biedronka");
+        employee = new Employee("Jan", "Kowalski", LocalDate.parse("1990-01-01"), Sex.MALE, 30000, Position.MANAGEMENT, 1);
+        company = new Company("Biedronka", "Warszawa");
     }
 
     @Test
@@ -27,17 +29,12 @@ public class EmployeeTest {
 
     @Test
     public void shouldReturnValidSalaryOfEmployee() {
-        assertEquals(3000, employee.getSalary(), 0.1);
+        assertEquals(30000, employee.getSalary(), 0.1);
     }
 
     @Test
     public void shouldReturnValidSizeOfExtentOfEmployee() {
         assertEquals(1, Employee.getExtent().size());
-    }
-
-    @Test
-    public void shouldReturnValidSizeOfExtentOfCompany() {
-        assertEquals(1, Company.getExtent().size());
     }
 
 

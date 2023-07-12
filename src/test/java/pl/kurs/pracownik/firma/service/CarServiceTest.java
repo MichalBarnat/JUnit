@@ -1,10 +1,9 @@
-package pl.kurs.car.service;
+package pl.kurs.pracownik.firma.service;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import pl.kurs.car.exceptions.NoOldestCarException;
-import pl.kurs.car.model.Car;
+import pl.kurs.pracownik.firma.exceptions.NoCarsExceptions;
+import pl.kurs.pracownik.firma.model.Car;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,10 +24,10 @@ public class CarServiceTest {
     @Before
     public void init() {
         service = new CarService();
-        car1 = new Car("bmw", 19);
-        car2 = new Car("audi", 25);
-        car3 = new Car("bmw", 38);
-        car4 = new Car("polonez", 7);
+        car1 = new Car("bmw", "3", 19);
+        car2 = new Car("audi", "a4", 25);
+        car3 = new Car("bmw", "5", 38);
+        car4 = new Car("polonez", "caro", 7);
 
         cars = new ArrayList<>(Arrays.asList(car1, car2, car3, car4));
     }
@@ -41,7 +40,7 @@ public class CarServiceTest {
         assertEquals(oldest, result);
     }
 
-    @Test(expected = NoOldestCarException.class)
+    @Test(expected = NoCarsExceptions.class)
     public void shouldThrowNoOldestCarExceptionWhenListIsNull() {
         List<Car> listForTest = null;
         service.oldestCar(listForTest);
