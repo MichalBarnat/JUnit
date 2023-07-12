@@ -14,12 +14,8 @@ public class Branch {
 
     private List<Car> cars = new ArrayList<>();
 
-    public Branch(String city, Company company) {
-        if(company == null) {
-            throw new IllegalArgumentException("Company is null");
-        }
+    public Branch(String city) {
         this.city = city;
-        this.company = company;
     }
 
     public void setCarToEmployee(Car car, Employee employee) {
@@ -47,19 +43,19 @@ public class Branch {
         this.city = city;
     }
 
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
     public List<Employee> getEmployees() {
         return employees;
     }
 
     public List<Car> getCars() {
         return cars;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

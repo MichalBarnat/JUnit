@@ -19,13 +19,21 @@ public class Employee extends Person {
 
     private List<Car> cars = new ArrayList<>();
 
-    public Employee(String name, String surname, LocalDate birthDate, Sex sex, double salary, Position position, int seniority) {
+    public Employee(String name, String surname, LocalDate birthDate, Sex sex, Position position, int seniority) {
         super(name, surname, birthDate, sex);
-        this.salary = salary;
         this.position = position;
         this.seniority = seniority;
         this.bonus = countBonus();
+        this.salary = countSalary();
         extent.add(this);
+    }
+
+    public double countSalary() {
+        return switch (position) {
+            case BOSS -> 30000;
+            case MANAGEMENT -> 20000;
+            case WORKER -> 5000;
+        };
     }
 
     public double countBonus() {

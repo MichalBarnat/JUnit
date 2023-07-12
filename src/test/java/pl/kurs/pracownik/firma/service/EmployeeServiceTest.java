@@ -31,17 +31,17 @@ public class EmployeeServiceTest {
         employeeService = new EmployeeService();
 
         e1 = new Employee("Zofia", "Nowak", LocalDate.of(1990, 1, 1),
-                Sex.FEMALE, 4100, Position.MANAGEMENT, 1);
+                Sex.FEMALE, Position.MANAGEMENT, 1);
         e2 = new Employee("Zuzanna", "Kowalski", LocalDate.of(1987, 2, 5),
-                Sex.FEMALE, 4200, Position.MANAGEMENT, 2);
+                Sex.FEMALE, Position.MANAGEMENT, 2);
         e3 = new Employee("Laura", "Wisniewski", LocalDate.of(1995, 3, 9),
-                Sex.FEMALE, 2000, Position.WORKER, 3);
+                Sex.FEMALE, Position.WORKER, 3);
         e4 = new Employee("Jakub", "Wojcik", LocalDate.of(1993, 4, 13),
-                Sex.MALE, 2000, Position.WORKER, 5);
+                Sex.MALE, Position.WORKER, 5);
         e5 = new Employee("Franciszek", "Kowalczyk", LocalDate.of(2000, 5, 23),
-                Sex.MALE, 2000, Position.WORKER, 3);
+                Sex.MALE, Position.WORKER, 3);
         e6 = new Employee("Antoni", "Kaminska", LocalDate.of(2001, 6, 29),
-                Sex.MALE, 6100, Position.BOSS, 7);
+                Sex.MALE, Position.BOSS, 7);
 
         employees = new ArrayList<>(Arrays.asList(e1, e2, e3, e4, e5, e6));
 
@@ -65,14 +65,14 @@ public class EmployeeServiceTest {
     public void shoudReturnHighestSalary() {
         double result = employeeService.highestSalary(employees);
 
-        assertEquals(6100, result, 0.1);
+        assertEquals(30000, result, 0.1);
     }
 
     @Test
     public void shoudReturnLowestSalary() {
         double result = employeeService.lowestSalary(employees);
 
-        assertEquals(2000, result, 0.1);
+        assertEquals(5000, result, 0.1);
     }
 
     @Test
@@ -116,5 +116,21 @@ public class EmployeeServiceTest {
         List<Employee> listForTest = null;
         employeeService.lowestSeniority(listForTest);
     }
+
+//    @Test
+//    public void shouldReturnEmployeeWhoWorksFor3Companies() {
+//        //workingInTheMostCompanies
+//    }
+//
+//    @Test
+//    public void shouldReturnListOfEmployeesWhoWorkForMoreThanOneCompany() {
+//        //employeesWorkForMoreThanOneCompany
+//    }
+//
+//    @Test
+//    public void shouldReturnListOfEmployeesWhoWorksAsWorkers() {
+//        //employeesOnPosition
+//    }
+
 
 }

@@ -30,17 +30,17 @@ public class CompanyServiceTest {
         companyService = new CompanyService();
 
         e1 = new Employee("Zofia", "Nowak", LocalDate.of(1990, 1, 1),
-                Sex.FEMALE, 4100, Position.MANAGEMENT, 1);
+                Sex.FEMALE, Position.MANAGEMENT, 1);
         e2 = new Employee("Zuzanna", "Kowalski", LocalDate.of(1987, 2, 5),
-                Sex.FEMALE, 4200, Position.MANAGEMENT, 2);
+                Sex.FEMALE, Position.MANAGEMENT, 2);
         e3 = new Employee("Laura", "Wisniewski", LocalDate.of(1995, 3, 9),
-                Sex.FEMALE, 2000, Position.WORKER, 3);
+                Sex.FEMALE, Position.WORKER, 3);
         e4 = new Employee("Jakub", "Wojcik", LocalDate.of(1993, 4, 13),
-                Sex.MALE, 2000, Position.WORKER, 5);
+                Sex.MALE, Position.WORKER, 5);
         e5 = new Employee("Franciszek", "Kowalczyk", LocalDate.of(2000, 5, 23),
-                Sex.MALE, 2000, Position.WORKER, 3);
+                Sex.MALE, Position.WORKER, 3);
         e6 = new Employee("Antoni", "Kaminska", LocalDate.of(2001, 6, 29),
-                Sex.MALE, 6100, Position.BOSS, 7);
+                Sex.MALE, Position.BOSS, 7);
 
         employees = new ArrayList<>(Arrays.asList(e1, e2, e3, e4, e5, e6));
 
@@ -48,10 +48,8 @@ public class CompanyServiceTest {
 
     @Test
     public void shouldReturnPersonWithHighestSalaryOnPosition() {
-        Employee highestInManagement = e2;
-        Employee result = companyService.highestSalaryOnPosition(employees, Position.MANAGEMENT);
-
-        assertEquals(highestInManagement, result);
+        Employee result = companyService.highestSalaryOnPosition(employees, Position.BOSS);
+        assertEquals(e6, result);
     }
 
     @Test (expected = NoEmployeeWithHighestSalaryException.class)
@@ -63,7 +61,6 @@ public class CompanyServiceTest {
     @Test
     public void shouldCountEmpoloyeesHiredOnPosition() {
         int result = companyService.countEmpoloyeesHiredOnPosition(employees, Position.WORKER);
-
         assertEquals(3, result);
     }
 
@@ -71,6 +68,6 @@ public class CompanyServiceTest {
     public void shouldReturnTotalEmployementCostInCompany() {
         double result = companyService.totalEmployementCostInCompany(employees);
 
-        assertEquals(20400, result, 0.1);
+        assertEquals(85000, result, 0.1);
     }
 }

@@ -47,6 +47,7 @@ public class Company {
         }
         employees.remove(employee);
         employee.getCompanies().remove(this);
+        extent.add(this);
     }
 
     public void addBranch(Branch branch) {
