@@ -1,8 +1,6 @@
 package pl.kurs.pracownik.firma.model;
 
-import pl.kurs.pracownik.firma.exceptions.BranchDoNotExistException;
-import pl.kurs.pracownik.firma.exceptions.EmployeeDoNotExistException;
-import pl.kurs.pracownik.firma.exceptions.NoCarsExceptions;
+import pl.kurs.pracownik.firma.exceptions.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,17 +24,20 @@ public class Company {
     }
 
     public void hireEmployee(Employee employee, Branch branch) {
-            if(employee == null || branch == null) {
-                throw new IllegalArgumentException("Employee or branch do not exist!");
-            }
-            if(employee.getCompanies().contains(this)) {
-                throw new IllegalArgumentException("EMployee is already hired in this company!");
-            }
-            if(branch.getCompany() != null && !branch.getCompany().equals(this)){
-                throw new IllegalArgumentException("This branch have other company");
-            }
-            employees.add(employee);
-            employee.getCompanies().add(this);
+        if (employee == null) {
+            throw new EmployeeDoNotExistException();
+        }
+        if (branch == null) {
+            throw new BranchDoNotExistException();
+        }
+        if (employee.getCompanies().contains(this)) {
+            throw new EmployeeIsAlreadyHiredException();
+        }
+        if (branch.getCompany() != null && !branch.getCompany().equals(this)) {
+            throw new BranchAlreadyHaveCompanyException();
+        }
+        employees.add(employee);
+        employee.getCompanies().add(this);
         branch.getEmployees().add(employee);
         employee.getBranches().add(branch);
         branch.setCompany(this);
@@ -44,11 +45,11 @@ public class Company {
     }
 
     public void fireEmployee(Employee employee) {
-        if(employee == null) {
+        if (employee == null) {
             throw new EmployeeDoNotExistException();
         }
-        if(!employee.getCompanies().contains(this) || employee.getCompanies().isEmpty()) {
-            throw new IllegalArgumentException("Employee can not be fired!");
+        if (!employee.getCompanies().contains(this) || employee.getCompanies().isEmpty()) {
+            throw new EmployeeCanNotBeFiredException();
         }
         employees.remove(employee);
         employee.getCompanies().remove(this);
@@ -56,18 +57,21 @@ public class Company {
     }
 
     public void addBranch(Branch branch) {
-        if(branch == null || branch.getCompany() != null) {
-            throw new IllegalArgumentException("Branch is null or have Company already");
+        if (branch == null) {
+            throw new BranchDoNotExistException();
+        }
+        if (branch.getCompany() != null) {
+            throw new BranchAlreadyHaveCompanyException();
         }
         branches.add(branch);
         branch.setCompany(this);
     }
 
     public void addCar(Car car, Branch branch) {
-        if(car == null) {
+        if (car == null) {
             throw new NoCarsExceptions();
         }
-        if(branch == null) {
+        if (branch == null) {
             throw new BranchDoNotExistException();
         }
         cars.add(car);
@@ -75,8 +79,6 @@ public class Company {
         car.setBranch(branch);
         branch.getCars().add(car);
     }
-
-
 
 
     public String getName() {

@@ -8,16 +8,19 @@ import java.time.LocalDate;
 import static org.junit.Assert.*;
 
 public class EmployeeTest {
-    Employee employee;
-    Company company;
-    Branch branch;
+    private Employee employee;
+    private Company company;
+    private Branch branch;
 
     @Before
     public void init() {
+        Employee.getExtent().clear();
+        Company.getExtent().clear();
         employee = new Employee("Jan", "Kowalski", LocalDate.parse("1990-01-01"), Sex.MALE, Position.BOSS, 1);
         company = new Company("Biedronka", "Warszawa");
         branch = new Branch("Warsaw");
         company.hireEmployee(employee, branch);
+
     }
 
     @Test
@@ -27,7 +30,7 @@ public class EmployeeTest {
 
     @Test
     public void shouldReturnValidSalaryOfEmployee() {
-        assertEquals(30000, employee.getSalary(), 0.1);
+        assertEquals(30000, employee.countSalary(), 0.1);
     }
 
     @Test
@@ -35,10 +38,10 @@ public class EmployeeTest {
         assertEquals(1, Employee.getExtent().size());
     }
 
-//    @Test
-//    public void shouldReturnValidSizeOfExtentOfCompany() {
-//        assertEquals(1, Company.getExtent().size());
-//    }
+    @Test
+    public void shouldReturnValidSizeOfExtentOfCompany() {
+        assertEquals(1, Company.getExtent().size());
+    }
 
     @Test
     public void shouldReturnValidSizeOfAssociationOnEmployeeSide() {

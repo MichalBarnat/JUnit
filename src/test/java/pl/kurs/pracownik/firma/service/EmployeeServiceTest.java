@@ -34,8 +34,6 @@ public class EmployeeServiceTest {
     private Branch branchC3b;
 
 
-
-
     private List<Employee> employees;
 
     @Before
@@ -76,8 +74,6 @@ public class EmployeeServiceTest {
 
         company1.hireEmployee(e3, branchC1a);
         company2.hireEmployee(e3, branchC2b);
-
-
 
 
     }
@@ -160,13 +156,13 @@ public class EmployeeServiceTest {
     @Test
     public void shouldReturnListOfEmployeesWhoWorkForMoreThanOneCompany() {
         //employeesWorkForMoreThanOneCompany
-        assertEquals(Arrays.asList(e1,e2,e3),employeeService.employeesWorkForMoreThanOneCompany(employees));
+        assertEquals(Arrays.asList(e1, e2, e3), employeeService.employeesWorkForMoreThanOneCompany(employees));
     }
 
     @Test
     public void shouldReturnListOfEmployeesWhoWorksAsWorkers() {
         //employeesOnPositiona
-        assertEquals(Arrays.asList(e3,e4,e5),employeeService.employeesOnPosition(employees,Position.WORKER));
+        assertEquals(Arrays.asList(e3, e4, e5), employeeService.employeesOnPosition(employees, Position.WORKER));
     }
 
 

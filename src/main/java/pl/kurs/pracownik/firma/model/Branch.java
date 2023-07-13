@@ -1,8 +1,8 @@
 package pl.kurs.pracownik.firma.model;
 
-import pl.kurs.pracownik.firma.exceptions.EmployeeDoNotExistException;
-import pl.kurs.pracownik.firma.exceptions.NoCarsExceptions;
+import pl.kurs.pracownik.firma.exceptions.*;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +18,8 @@ public class Branch {
         this.city = city;
     }
 
+    // Car 1 -- * usage * -- 1 emp
+
     public void setCarToEmployee(Car car, Employee employee) {
         if(car == null) {
             throw new NoCarsExceptions();
@@ -25,11 +27,14 @@ public class Branch {
         if(employee == null) {
             throw new EmployeeDoNotExistException();
         }
-        if(!cars.contains(car) || !employees.contains(employee)) {
-            throw new IllegalArgumentException("Car or employee is not a part of this branch!");
+        if(!employees.contains(employee)) {
+            throw new EmployeeNotPartOfCompanyException();
+        }
+        if(!cars.contains(car)) {
+            throw new CarNotPartOfBranchException();
         }
         if(car.getEmployee() != null) {
-            throw new IllegalArgumentException("Car already have set employee!");
+            throw new CarAlreadyHaveUserException();
         }
         car.setEmployee(employee);
         employee.getCars().add(car);

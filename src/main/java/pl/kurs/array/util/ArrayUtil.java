@@ -12,7 +12,7 @@ public class ArrayUtil {
 
     public int sumOfArray(int[] arr) {
         if (arr == null) {
-            throw new ArrayIsNullException("Arrays is null!");
+            throw new ArrayIsNullException("Array is null!");
         }
         int result = 0;
         for (int i : arr) {
@@ -23,7 +23,7 @@ public class ArrayUtil {
 
     public int productOfArray(int[] arr) {
         if (arr == null) {
-            throw new ArrayIsNullException("Arrays is null!");
+            throw new ArrayIsNullException("Array is null!");
         }
         int result = 1;
         for (int i : arr) {

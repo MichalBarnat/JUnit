@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Employee extends Person {
-    private double salary;
+
     private int seniority;
     private double bonus;
     private Position position;
@@ -24,7 +24,7 @@ public class Employee extends Person {
         this.position = position;
         this.seniority = seniority;
         this.bonus = countBonus();
-        this.salary = countSalary();
+
         extent.add(this);
     }
 
@@ -37,16 +37,9 @@ public class Employee extends Person {
     }
 
     public double countBonus() {
-        return Math.pow((salary * 0.1), seniority);
+        return Math.pow((countSalary() * 0.1), seniority);
     }
 
-    public double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
-    }
 
     public static List<Employee> getExtent() {
         return extent;
@@ -80,12 +73,12 @@ public class Employee extends Person {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Employee employee)) return false;
-        return Double.compare(employee.salary, salary) == 0 && seniority == employee.seniority && Double.compare(employee.bonus, bonus) == 0 && position == employee.position && Objects.equals(companies, employee.companies) && Objects.equals(branches, employee.branches);
+        return seniority == employee.seniority && Double.compare(employee.bonus, bonus) == 0 && position == employee.position && Objects.equals(companies, employee.companies) && Objects.equals(branches, employee.branches) && Objects.equals(cars, employee.cars);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(salary, seniority, bonus, position, companies, branches);
+        return Objects.hash(seniority, bonus, position, companies, branches, cars);
     }
 
     @Override

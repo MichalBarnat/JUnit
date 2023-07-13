@@ -80,7 +80,7 @@ public class CarService {
                 .orElseGet(Collections::emptyList)
                 .stream()
                 .filter(Objects::nonNull)
-                .map(c -> c.getEmployee())
+                .map(Car::getEmployee)
                 .filter(Objects::nonNull)
                 .filter(e -> e.getPosition().equals(position))
                 .map(Employee::getCars)

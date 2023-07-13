@@ -33,7 +33,7 @@ public class BranchService {
         }
         int result = 0;
         for (Employee employee : branch.getEmployees()) {
-            result += employee.getSalary();
+            result += employee.countSalary();
         }
         return result;
     }

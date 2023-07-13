@@ -29,7 +29,7 @@ public class CompanyService {
                 .filter(p -> p.getPosition().equals(position))
                 .toList()
                 .stream()
-                .max(Comparator.comparing(Employee::getSalary))
+                .max(Comparator.comparing(Employee::countSalary))
                 .orElseThrow(NoEmployeeWithHighestSalaryException::new);
     }
 
@@ -38,7 +38,7 @@ public class CompanyService {
                 .orElseGet(Collections::emptyList)
                 .stream()
                 .filter(Objects::nonNull)
-                .mapToDouble(Employee::getSalary)
+                .mapToDouble(Employee::countSalary)
                 .sum();
     }
 

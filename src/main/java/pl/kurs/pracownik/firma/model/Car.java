@@ -1,6 +1,8 @@
 package pl.kurs.pracownik.firma.model;
 
 import pl.kurs.pracownik.firma.exceptions.BranchDoNotExistException;
+import pl.kurs.pracownik.firma.exceptions.CarAgeMustBeHigherThanZeroException;
+import pl.kurs.pracownik.firma.exceptions.CompanyDoNotExistException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,7 @@ public class Car {
 
     public Car(String brand, String model, int age) {
         if(age < 0){
-            throw new IllegalArgumentException("Cars age must be 0 or higher!");
+            throw new CarAgeMustBeHigherThanZeroException();
         }
         this.brand = brand;
         this.model = model;
@@ -56,7 +58,7 @@ public class Car {
 
     public void setCompany(Company company) {
         if(company == null) {
-            throw new IllegalArgumentException("Company is null!");
+            throw new CompanyDoNotExistException();
         }
         this.company = company;
     }

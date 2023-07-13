@@ -1,5 +1,7 @@
 package pl.kurs.array.util;
 
+import org.assertj.core.api.Assertions;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Before;
 import org.junit.Test;
 import pl.kurs.array.util.exceptions.ArrayIsNullException;
@@ -29,10 +31,26 @@ public class ArrayUtilTest {
         assertEquals(120, product);
     }
 
-    @Test(expected = ArrayIsNullException.class)
+    @Test //(expected = ArrayIsNullException.class)
     public void shouldThrowArrayIsNullExceptionOnSumOfArray() {
-        int[] arr = null;
-        arrayUtil.sumOfArray(arr);
+        int[] arrayForTest = null;
+        Throwable throwable = new ArrayIsNullException("Array is null!");
+
+        Throwable e = assertThrows(ArrayIsNullException.class, () -> arrayUtil.sumOfArray(arrayForTest));
+
+        // assertj
+        Assertions.assertThat(e)
+                .hasSameClassAs(throwable)
+                .hasMessage("Array is null!")
+                .hasMessageContaining("is")
+                .hasFieldOrProperty("message");
+
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(e.getClass()).isEqualTo(NullPointerException.class);
+        softAssertions.assertThat(e.getMessage()).isEqualTo("Arraby is null!");
+        softAssertions.assertThat(e.getMessage()).contains("ibs");
+
+        softAssertions.assertAll();
     }
 
     @Test(expected = ArrayIsNullException.class)
@@ -73,7 +91,6 @@ public class ArrayUtilTest {
         int[] arr = {5, 4, 3, 2, 1};
         assertArrayEquals(array, arrayUtil.sort(arr));
     }
-
 
 
 }

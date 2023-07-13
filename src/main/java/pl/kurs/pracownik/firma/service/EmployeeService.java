@@ -33,7 +33,7 @@ public class EmployeeService {
                 .orElseGet(Collections::emptyList)
                 .stream()
                 .filter(Objects::nonNull)
-                .map(Employee::getSalary)
+                .map(Employee::countSalary)
                 .max(Comparator.comparing(Double::doubleValue))
                 .orElseThrow(EmployeeDoNotExistException::new);
     }
@@ -43,7 +43,7 @@ public class EmployeeService {
                 .orElseGet(Collections::emptyList)
                 .stream()
                 .filter(Objects::nonNull)
-                .map(Employee::getSalary)
+                .map(Employee::countSalary)
                 .min(Comparator.comparing(Double::doubleValue))
                 .orElseThrow(EmployeeDoNotExistException::new);
     }
